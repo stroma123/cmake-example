@@ -6,6 +6,7 @@ set(CMAKE_C_COMPILER /usr/bin/aarch64-linux-gnu-gcc)
 set(CMAKE_CXX_COMPILER /usr/bin/aarch64-linux-gnu-g++)
 
 # Optional sysroot (only if you actually have one)
+# if not set use default from /usr/aarch64-linux-gnu on Debian/Ubuntu
 # set(CMAKE_SYSROOT /opt/sysroots/aarch64)
 
 # Root path for finding libs/headers
