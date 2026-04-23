@@ -1,0 +1,46 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "Native Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/native/src/sysnet",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb"
+    },
+
+    {
+      "name": "AArch64 Remote Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/aarch64/src/sysnet",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb-multiarch",
+      "miDebuggerServerAddress": "${config:debug.targetHost}:${config:debug.targetPort}",
+      "stopAtEntry": false,
+      "preLaunchTask": "Build+Deploy+Run AArch64",
+      "setupCommands": [
+        {
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "text": "set sysroot /home/ico/sysroots/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot"
+        },
+        {
+          "text": "set solib-search-path /home/ico/sysroots/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot/lib:/home/ico/sysroots/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot/usr/lib"
+        },
+        {
+          "text": "break main"
+        }
+      ],
+      "sourceFileMap": {
+        "/home/ico/work/src/cmake-example": "${workspaceFolder}"
+      }
+    }
+
+  ]
+}

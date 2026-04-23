@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+
+    {
+      "label": "Build Native",
+      "type": "shell",
+      "command": "cmake --build build/native",
+      "group": "build"
+    },
+
+    {
+      "label": "Build AArch64",
+      "type": "shell",
+      "command": "cmake --build build/aarch64",
+      "group": "build"
+    },
+{
+  "label": "Deploy AArch64",
+  "type": "shell",
+  //"command": "ssh -i ~/.ssh/boxssh_rsa deva@{config:debug.targetHost} 'pkill -9 sysnet 2>/dev/null || true; pkill -9 gdbserver 2>/dev/null || true; for i in $(seq 1 20); do pgrep -x sysnet > /dev/null || break; sleep 0.1; done' && scp -i ~/.ssh/boxssh_rsa build/aarch64/src/sysnet deva@10.130.2.70:/home/deva/",
+  "command": "scp -i ~/.ssh/boxssh_rsa build/aarch64/src/sysnet deva@${config:debug.targetHost}:/home/deva/sysnet.new && ssh -i ~/.ssh/boxssh_rsa deva@${config:debug.targetHost} 'pkill -9 sysnet 2>/dev/null || true; pkill -9 gdbserver 2>/dev/null || true; mv /home/deva/sysnet.new /home/deva/sysnet'",
+  "problemMatcher": []
+},
+    {
+      "label": "Run gdbserver",
+      "type": "shell",
+      //"command": "ssh -i ~/.ssh/boxssh_rsa deva@${config:debug.targetHost} 'pkill gdbserver || true; pkill sysnet || true; sleep 0.5; gdbserver :${config:debug.targetPort} /home/deva/sysnet > /home/deva/gdbserver.log 2>&1 &'",
+      "command": "ssh -i ~/.ssh/boxssh_rsa deva@${config:debug.targetHost} 'pkill gdbserver || true; pkill sysnet || true; gdbserver :${config:debug.targetPort} /home/deva/sysnet > /dev/null 2>&1 &'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Wait for gdbserver",
+      "type": "shell",
+      "command": "sleep 1"
+    },   
+    {
+      "label": "Build+Deploy+Run AArch64",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Build AArch64",
+        "Deploy AArch64",
+        "Run gdbserver"
+        //"Wait for gdbserver"
+      ]
+    }
+  ]
+}

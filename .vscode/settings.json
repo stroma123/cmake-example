@@ -1,0 +1,8 @@
+{
+  "debug.targetHost": "10.130.2.70",
+  "debug.targetPort": "8234",
+
+  "cmake.generator": "Unix Makefiles",
+  // Set default CMake preset
+  "cmake.configurePreset": "native-debug"
+}
