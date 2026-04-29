@@ -1,0 +1,29 @@
+{
+  //"name": "Buildroot ARM64",
+  //"image": "db95box_db95:0.1",
+
+  "name": "db95box-dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+
+  "runArgs": [
+    "--network=host",
+    "-v", "/home/ico/.ssh:/root/.ssh:Z"
+  ],
+
+  "remoteUser": "root",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools"
+      ]
+    }
+  }
+}

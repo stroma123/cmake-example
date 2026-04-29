@@ -28,10 +28,10 @@
           "ignoreFailures": true
         },
         {
-          "text": "set sysroot /home/ico/sysroots/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot"
+          "text": "set sysroot /opt/cross/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot"
         },
         {
-          "text": "set solib-search-path /home/ico/sysroots/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot/lib:/home/ico/sysroots/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot/usr/lib"
+          "text": "set solib-search-path /opt/cross/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot/lib:/opt/cross/aarch64-cortexa53-linux-gnu/aarch64-cortexa53-linux-gnu/sysroot/usr/lib"
         },
         {
           "text": "break main"
